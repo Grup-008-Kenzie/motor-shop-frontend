@@ -4,6 +4,7 @@ import { HomeStyled } from "../../styles/Home";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 import { CarrouselComponent } from "../../components/carrousel";
+import { Footer } from "../../components/Footer";
 
 export const HomePage = () => {
 
@@ -12,6 +13,10 @@ export const HomePage = () => {
     <HomeStyled>
       <Header />
       <CarrouselComponent/>
+      <div className="separacao">
+
+      </div>
+      <Footer/>
     </HomeStyled>
   );
 };
