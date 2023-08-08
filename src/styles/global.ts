@@ -1,16 +1,16 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
+
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 *{
     margin: 0;
     padding: 0;
     box-sizing:border-box;
+    font-family: 'Inter', sans-serif;
 }
-  body {
-    margin: 0;
-    padding: 0;
-    background-color: #FFFFFF;
-  }
   :root{
     --brand1: #4529E6;
     --brand1: #5126EA;
@@ -28,7 +28,8 @@ const GlobalStyle = createGlobalStyle`
     --Grey-8: #F1F3F5;
     --Grey-9: #F8F9FA;
     --Grey-10: #FDFDFD;
-    --WhiteFixed: #FFFFFF:
+    --WhiteFixed: #FFFFFF;
+    --Transparent: transparent;
 
     --alert1:#CD2B31;
     --alert2:#FDD8D8;
@@ -51,7 +52,37 @@ const GlobalStyle = createGlobalStyle`
     --random11: #5700E3;
     --random12: #30007D;
 
-    
   }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #FFFFFF;
+  }
+
+  @-webkit-keyframes slide-in-right {
+  0% {
+    -webkit-transform: translateX(1000px);
+            transform: translateX(1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-in-right {
+  0% {
+    -webkit-transform: translateX(1000px);
+            transform: translateX(1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    opacity: 1;
+  }
+}
 `;
 export default GlobalStyle;
