@@ -5,4 +5,8 @@ export const HomeStyled = styled.main`
   display: flex;
   flex-direction: column;
   position: relative;
+  .separacao{
+    height: 550px;
+    width: 100%;
+  }
 `;

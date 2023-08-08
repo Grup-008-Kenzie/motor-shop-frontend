@@ -13,6 +13,9 @@ export const HomePage = () => {
     <HomeStyled>
       <Header />
       <CarrouselComponent/>
+      <div className="separacao">
+
+      </div>
       <Footer/>
     </HomeStyled>
   );
