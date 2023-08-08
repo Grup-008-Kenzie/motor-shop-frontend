@@ -12,10 +12,10 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Inter', sans-serif;
 }
   :root{
-    --brand1: #4529E6;
-    --brand1: #5126EA;
-    --brand1: ##B0A6F0;
-    --brand1: ##EDEAFD;
+    --brand1: #006bba;
+    --brand2: #10619c;
+    --brand3: #6eb5ea;
+    --brand4: #c3e3fa;
 
     --Grey-0: #0B0D0D;
     --Grey-1: #212529;
@@ -59,6 +59,44 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     background-color: #FFFFFF;
   }
+
+
+
+  * {
+  scrollbar-width: thin;
+  scrollbar-color: var(--brand2) var(--brand4);
+}
+
+/* Chrome, Edge and Safari */
+*::-webkit-scrollbar {
+  width: 8px;
+  width: 8px;
+}
+*::-webkit-scrollbar-track {
+  border-radius: 7px;
+  background-color: var(--Grey-10);
+}
+
+*::-webkit-scrollbar-track:hover {
+  background-color: var(--Grey-8);
+}
+
+*::-webkit-scrollbar-track:active {
+  background-color: var(--Grey-8);
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: var(--brand1);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--alert1);
+}
+
+*::-webkit-scrollbar-thumb:active {
+  background-color: var(--brand2);
+}
 
   @-webkit-keyframes slide-in-right {
   0% {
