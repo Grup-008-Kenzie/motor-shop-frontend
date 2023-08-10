@@ -8,6 +8,17 @@ export const FilterAreaStyle = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  .header-mobile-filter {
+    display: flex;
+    justify-content: space-between;
+
+    button {
+      border: none;
+      background-color: transparent;
+      font-size: 22px;
+      cursor: pointer;
+    }
+  }
   .filter-x {
     display: none;
   }
@@ -32,10 +43,6 @@ export const FilterAreaStyle = styled.div`
       background-color: transparent;
       border: none;
       cursor: pointer;
-    }
-
-    .filter-x {
-      display: flex;
     }
 
     .button_clear {
