@@ -7,8 +7,7 @@ export const FooterStyled = styled.footer`
   justify-content: space-around;
   height: 140px;
   background-color: var(--Grey-0);
-  position: absolute;
-  bottom: 0;
+
   margin-top: 140px;
   button {
     padding: 15px;
