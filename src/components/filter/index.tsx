@@ -6,7 +6,17 @@ import { FilterAreaStyle } from "./style";
 
 const listMarca = ["bmw", "audi", "ferrari", "vw"];
 
-export const FilterArea = () => {
+interface IProps {
+  class_Name: string;
+  toogleShowFilter: () => void;
+  showFilter: boolean;
+}
+
+export const FilterArea = ({
+  class_Name,
+  toogleShowFilter,
+  showFilter,
+}: IProps) => {
   const [filters, setFilters] = useState<string[]>([]);
   const [filtersKm, setFiltersKm] = useState<string>("0");
   const [filtersPrice, setFiltersPrice] = useState<string>("0");
@@ -17,15 +27,15 @@ export const FilterArea = () => {
     setFiltersPrice("0");
   };
 
-  // console.log(filters);
-  // console.log(filtersKm);
-  // console.log(filtersPrice);
+  console.log(filters);
+  console.log(filtersKm);
+  console.log(filtersPrice);
 
   return (
-    <FilterAreaStyle className="filter-area Show-filter-area">
+    <FilterAreaStyle className={class_Name}>
       <div className="header-mobile-filter filter-x">
         <p className="">filtros</p>
-        <button>x</button>
+        <button onClick={() => toogleShowFilter()}>x</button>
       </div>
       <FilterList
         title="Marca"
@@ -75,13 +85,24 @@ export const FilterArea = () => {
         attrprice="R$ "
         attrKm=",00"
       />
-      <button
-        className="button_clear"
-        type="button"
-        onClick={() => clearFilters()}
-      >
-        Limpar filtros
-      </button>
+
+      {showFilter ? (
+        <button
+          className="button_clear"
+          type="button"
+          onClick={() => toogleShowFilter()}
+        >
+          Ver Anuncios
+        </button>
+      ) : (
+        <button
+          className="button_clear"
+          type="button"
+          onClick={() => clearFilters()}
+        >
+          Limpar filtros
+        </button>
+      )}
     </FilterAreaStyle>
   );
 };

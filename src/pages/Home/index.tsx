@@ -9,11 +9,43 @@ import { FilterArea } from "../../components/filter";
 import { useState } from "react";
 
 export const HomePage = () => {
+  const [showFilter, setShowFilter] = useState<boolean>(false);
+
+  const toogleShowFilter = () => {
+    setShowFilter(!showFilter);
+  };
+
   return (
     <HomeStyled>
       <Header />
       <CarrouselComponent />
-      <FilterArea />
+      <FilterArea
+        class_Name="filter-area-desktop"
+        toogleShowFilter={toogleShowFilter}
+        showFilter={showFilter}
+      />
+      {showFilter ? (
+        <FilterArea
+          class_Name="filter-area-mobile"
+          toogleShowFilter={toogleShowFilter}
+          showFilter={showFilter}
+        />
+      ) : null}
+
+      {/* ================= componente da lista de veiculos ==================*/}
+
+      {showFilter ? (
+        <></>
+      ) : (
+        <button
+          className="button-filter"
+          onClick={() => {
+            toogleShowFilter();
+          }}
+        >
+          Filtros
+        </button>
+      )}
 
       <Footer />
     </HomeStyled>
