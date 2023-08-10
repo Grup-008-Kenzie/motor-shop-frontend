@@ -27,6 +27,7 @@ export const HeaderStyled = styled.header`
     justify-content: center;
     align-items: center;
     height: 70px;
+    cursor: pointer;
     img {
       max-width: 100%;
       height: 100%;
