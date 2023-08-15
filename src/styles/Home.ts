@@ -15,7 +15,14 @@ export const HomeStyled = styled.main`
     display: none;
   }
 
-  @media (max-width: 800px) {
+  .contents{
+    display: flex;
+    justify-content: space-between;
+  }
+  @media (max-width: 850px) {
+    .contents{
+      flex-direction: column;
+    }
     .button-filter {
       width: 420px;
       display: flex;

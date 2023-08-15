@@ -15,7 +15,7 @@ const GlobalStyle = createGlobalStyle`
     --brand1: #006bba;
     --brand2: #10619c;
     --brand3: #6eb5ea;
-    --brand4: #c3e3fa;
+    --brand4: #D2E0EB;
 
     --Grey-0: #0B0D0D;
     --Grey-1: #212529;
