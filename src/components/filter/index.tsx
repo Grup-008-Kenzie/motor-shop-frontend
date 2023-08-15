@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FilterList } from "./filterList";
 import { FilterRange } from "./filterRang";
 
 import { FilterAreaStyle } from "./style";
+import { GlobalContext } from "../../contexts/contextGlobal";
 
-const listMarca = ["bmw", "audi", "ferrari", "vw"];
+const listBrand = ["chevrolet", "citroën", "fiat", "ford","honda","hyundai","nissan","peugeot","renault","toyota","volkswagen",];
+const listColor = ["Azul", "Branca", "Cinza", "Prata","Preta","Vermelho","Outras"];
+
 
 interface IProps {
   class_Name: string;
@@ -20,6 +23,11 @@ export const FilterArea = ({
   const [filters, setFilters] = useState<string[]>([]);
   const [filtersKm, setFiltersKm] = useState<string>("0");
   const [filtersPrice, setFiltersPrice] = useState<string>("0");
+
+  const {} = useContext(GlobalContext);
+
+
+  
 
   const clearFilters = () => {
     setFilters([]);
@@ -39,31 +47,31 @@ export const FilterArea = ({
       </div>
       <FilterList
         title="Marca"
-        list={listMarca}
+        list={listBrand}
         setFilters={setFilters}
         filters={filters}
       />
       <FilterList
         title="Modelo"
-        list={listMarca}
+        list={listBrand}
         setFilters={setFilters}
         filters={filters}
       />
       <FilterList
         title="cor"
-        list={listMarca}
+        list={listColor}
         setFilters={setFilters}
         filters={filters}
       />
       <FilterList
         title="ano"
-        list={listMarca}
+        list={listBrand}
         setFilters={setFilters}
         filters={filters}
       />
       <FilterList
         title="Combustivel"
-        list={listMarca}
+        list={listBrand}
         setFilters={setFilters}
         filters={filters}
       />
