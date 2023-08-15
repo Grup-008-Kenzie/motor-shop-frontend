@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 
 export const FilterAreaStyle = styled.div`
   height: auto;
-  width: 400px;
+  width: 450px;
   padding: 2rem;
   padding-left: 60px;
   display: flex;
@@ -53,10 +53,10 @@ export const FilterAreaStyle = styled.div`
 
   .button_clear {
     padding: 12px;
-    background-color: var(--random4);
+    background-color: var(--brand1);
     font-size: 16px;
     color: var(--WhiteFixed);
-    border: 2px solid var(--random4);
+    border: 2px solid var(--brand1);
     transition: all 0.3s;
     cursor: pointer;
   }

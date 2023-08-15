@@ -10,4 +10,6 @@ export interface ContexGlobalData {
   hamburgeropen: boolean;
   setHamburgerOpen: Dispatch<SetStateAction<boolean>>;
   navigate: NavigateFunction;
+  setLoading: Dispatch<SetStateAction<boolean>>;
+  loading: boolean;
 }
