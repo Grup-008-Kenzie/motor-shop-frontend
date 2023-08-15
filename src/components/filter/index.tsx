@@ -27,9 +27,9 @@ export const FilterArea = ({
     setFiltersPrice("0");
   };
 
-  console.log(filters);
-  console.log(filtersKm);
-  console.log(filtersPrice);
+  // console.log(filters);
+  // console.log(filtersKm);
+  // console.log(filtersPrice);
 
   return (
     <FilterAreaStyle className={class_Name}>
