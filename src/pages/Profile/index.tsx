@@ -1,7 +1,18 @@
+import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
+import { ListCarProfile } from "../../components/ListCarsProfile";
+import { ModalCreateAnnouncement } from "../../components/modal/modalCreateAnnouncement";
+import { useState } from "react";
 import { ProfilePageStyle } from "./style";
 
 export const ProfilePage = () => {
+  const [showModalCreateAnnoucement, setShowModalCreateAnnoucement] =
+    useState<boolean>(false);
+
+  const ToggleShowModal = () => {
+    setShowModalCreateAnnoucement(!showModalCreateAnnoucement);
+  };
+
   return (
     <ProfilePageStyle>
       <Header />
@@ -20,8 +31,15 @@ export const ProfilePage = () => {
           industry. Lorem Ipsum has been the industry's standard dummy text ever
           since the 1500s
         </p>
-        <button>Criar anuncio</button>
+        <button onClick={() => ToggleShowModal()}>Criar anuncio</button>
       </div>
+
+      <ListCarProfile />
+      {showModalCreateAnnoucement ? (
+        <ModalCreateAnnouncement ToggleShowModal={ToggleShowModal} />
+      ) : null}
+
+      <Footer />
     </ProfilePageStyle>
   );
 };
