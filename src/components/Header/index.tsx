@@ -5,20 +5,20 @@ import { useContext } from "react";
 import { GlobalContext } from "../../contexts/contextGlobal";
 
 export const Header = () => {
-  const { hamburgeropen, setHamburgerOpen } = useContext(GlobalContext);
+  const { hamburgeropen, setHamburgerOpen, navigate } = useContext(GlobalContext);
 
   const toggleMenu = () => {
     setHamburgerOpen(!hamburgeropen);
   };
   return (
     <HeaderStyled>
-      <div className="Logo">
+      <div className="Logo" onClick={()=>navigate("/")}>
         <img src={Logo} alt="" />
       </div>
       <nav className="navMain">
         <ul>
           <li>
-            <ButtonStandard
+            <ButtonStandard onClick={()=>navigate("/Login")}
               bg="--Grey-10"
               color="--Grey-2"
               colorBorder="--Grey-9"

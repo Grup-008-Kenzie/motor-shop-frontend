@@ -20,8 +20,11 @@ export const FilterListStyle = styled.div`
     text-transform: capitalize;
     transition: all ease-in 0.2s;
   }
+  .filterBrand{
+    color: var(--Grey-0);
+  }
   li:hover {
-    opacity: 0.7;
+    color: var(--Grey-2);
   }
 
   button {

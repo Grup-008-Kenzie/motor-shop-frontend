@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
+import { NavigateFunction } from "react-router-dom";
 
 export interface LoginData {
   email: string;
@@ -8,4 +9,7 @@ export interface LoginData {
 export interface ContexGlobalData {
   hamburgeropen: boolean;
   setHamburgerOpen: Dispatch<SetStateAction<boolean>>;
+  navigate: NavigateFunction;
+  setLoading: Dispatch<SetStateAction<boolean>>;
+  loading: boolean;
 }

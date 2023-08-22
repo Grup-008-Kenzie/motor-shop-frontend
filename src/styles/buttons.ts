@@ -22,7 +22,7 @@ export const ButtonStandard = styled.button<StyledButtonProps>`
   background-color: var(${(props) => props.bg || "--WhiteFixed"});
   padding: 12px 28px 12px 28px;
   cursor: pointer;
-  transition: 1s;
+  transition: 0.8s;
   &:hover{
     border: 2px solid var(${(props) => props.HoverColorBorder || "--Grey-0"});
   }
