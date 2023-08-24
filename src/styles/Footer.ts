@@ -8,7 +8,7 @@ export const FooterStyled = styled.footer`
   height: 140px;
   background-color: var(--Grey-0);
 
-  margin-top: 140px;
+  margin-top: 100px;
   button {
     padding: 15px;
   }

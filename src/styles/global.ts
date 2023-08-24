@@ -91,7 +91,7 @@ const GlobalStyle = createGlobalStyle`
 }
 
 *::-webkit-scrollbar-thumb:hover {
-  background-color: var(--alert1);
+  background-color: var(--brand1);
 }
 
 *::-webkit-scrollbar-thumb:active {
