@@ -177,7 +177,6 @@ export const FilterList = () => {
   }, [models]);
 
   useEffect(() => {
-    console.log(displayedModels);
   }, [displayedModels]);
 
   // FILTROS
