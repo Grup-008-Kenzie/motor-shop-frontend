@@ -73,5 +73,12 @@ export const ProfilePageStyle = styled.div`
     .container-profile {
       width: 90%;
     }
+
+    .info-profile h3 {
+      font-size: 20px;
+    }
+    .info-profile p {
+      font-size: 16px;
+    }
   }
 `;
