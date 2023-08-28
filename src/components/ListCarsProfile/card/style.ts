@@ -7,6 +7,17 @@ export const StyledCardProfile = styled.li`
   width: 20%;
   margin-bottom: 50px;
 
+  @media (max-width: 1000px) {
+    width: 45%;
+  }
+
+  @media (max-width: 800px) {
+    width: 45%;
+  }
+
+  @media (max-width: 800px) {
+    width: 90%;
+  }
   .image-container {
     background-color: var(--Grey-7);
     position: relative;
