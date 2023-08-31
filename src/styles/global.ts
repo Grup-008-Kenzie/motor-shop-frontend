@@ -11,6 +11,9 @@ const GlobalStyle = createGlobalStyle`
     box-sizing:border-box;
     font-family: 'Inter', sans-serif;
 }
+.modal-open{
+  overflow: hidden;
+}
   :root{
     --brand1: #006bba;
     --brand2: #10619c;

@@ -21,7 +21,37 @@ export const ProfilePageStyle = styled.div`
     padding: 50px;
     gap: 1.6rem;
     border-radius: 4px;
-
+    .avatarUser:hover span{
+      display: flex;
+    }
+    .avatarUser {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100px;
+      height: 100px;
+      background-color: var(--brand1);
+      border-radius: 50%;
+      font-family: "Inter", sans-serif;
+      font-weight: 500;
+      color: var(--WhiteFixed);
+      font-size: 2.2rem;
+      position: relative;
+      span {
+        display: none;
+        padding-top: 50px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        font-size: 0.8rem;
+        position: fixed;
+        background-color: rgba(11, 13, 13, 0.3);
+        width: 100px;
+        height: 100px;
+        transition: 1s;
+        cursor: pointer;
+      }
+    }
     img {
       width: 100px;
       height: 100px;
