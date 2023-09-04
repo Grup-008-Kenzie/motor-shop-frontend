@@ -5,15 +5,14 @@ import { ModalCreateAnnouncement } from "../../components/modal/modalCreateAnnou
 import { useContext, useEffect, useState } from "react";
 import { ProfilePageStyle } from "./style";
 import { GlobalContext } from "../../contexts/contextGlobal";
-import { ModalUpdateUser } from "../../components/modal/modalEditUser";
+import { ModalDeleteUser, ModalUpdateUser } from "../../components/modal/modalEditUser";
 
 export const ProfilePage = () => {
-  const { navigate, usrInf, modalUpdateOn, setModalUpdateOn } = useContext(GlobalContext);
+  const { navigate,modalDeleteOn, usrInf, modalUpdateOn, setModalUpdateOn } = useContext(GlobalContext);
   const token = localStorage.getItem("MotorShopToken");
 
   modalUpdateOn ? document.body.classList.add("modal-open"): document.body.classList.remove("modal-open");
 
-  console.log(usrInf)
   useEffect(()=>{
     if(!token){
       navigate("/")
@@ -27,9 +26,13 @@ export const ProfilePage = () => {
     setShowModalCreateAnnoucement(!showModalCreateAnnoucement);
   };
 
+
+  showModalCreateAnnoucement? document.body.classList.add("modal-open"): document.body.classList.remove("modal-open");
+  
   return (
     <ProfilePageStyle>
       {modalUpdateOn? <ModalUpdateUser/>: null}
+      {modalDeleteOn? <ModalDeleteUser/>: null}
       <Header />
       <div className="subheader-blue"></div>
       <div className="container-profile">

@@ -1,14 +1,43 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { GlobalContext } from "../../../contexts/contextGlobal";
-import { ModalEditeUser } from "./style";
+import { ModalEditeUser, ModalUserDelete } from "./style";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { RegisterFormData } from "../../../@types/types";
+import { RegisterFormData, UpdateFormData } from "../../../@types/types";
 import { useForm } from "react-hook-form";
+import { ButtonStandard } from "../../../styles/buttons";
+import { RegisterLoginContext } from "../../../contexts/contexRegisterLogin";
+import { apiLocal } from "../../../services/api";
+import { toast } from "react-toastify";
 
 export const ModalUpdateUser = () => {
-  const { navigate, usrInf, modalUpdateOn, setModalUpdateOn } =
-    useContext(GlobalContext);
+  const {
+    navigate,
+    usrInf,
+    modalUpdateOn,
+    setModalUpdateOn,
+    userInfo,
+    modalDeleteOn,
+    setModalDeleteOn,
+  } = useContext(GlobalContext);
+
+  const {} = useContext(RegisterLoginContext);
+
+  const [phoneNumber, setPhoneNumber] = useState<string>(usrInf.phone_number);
+  const [descriptionUpdate, setDescriptionUpdate] = useState<string>(
+    usrInf.description
+  );
+
+  const formatPhoneNumber = (value: string): string => {
+    const cleanedValue: string = value.replace(/\D/g, "");
+
+    const formattedValue: string = cleanedValue.replace(
+      /^(\d{2})(\d{1,5})(\d{0,4})$/,
+      "($1) $2-$3"
+    );
+
+    return formattedValue;
+  };
 
   modalUpdateOn
     ? document.body.classList.add("modal-open")
@@ -18,29 +47,66 @@ export const ModalUpdateUser = () => {
     name: yup.string().required("Nome Obrigatório"),
     email: yup.string().required("Email Obrigatório").email(),
     birthdate: yup.string().required("O campo de data não pode ficar vazio"),
-    cpf: yup.string().required("O CPF não pode ficar vazio"),
     phone_number: yup
       .string()
       .required("O campo de Celular não pode ficar vazio"),
-    cep: yup.string().required("O campo Cep não pode ficar vazio"),
-    state: yup.string().required("O campo de Estado não pode ficar vazio"),
-    city: yup.string().required("O campo de Cidade não pode ficar vazio"),
-    street: yup.string().required("O campo rua não pode ficar vazio"),
-    number: yup.string().required("O numero não pode ficar vazio"),
-    password: yup.string().required("Senha Obrigatório"),
-    passwordConfirmation: yup
-      .string()
-      .oneOf([yup.ref("password")], "As senhas não correspondem")
-      .required("Esse campo não pode ficar vazio"),
   });
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<RegisterFormData>({
+  } = useForm<UpdateFormData>({
     resolver: yupResolver(formSchema),
   });
+
+  const handlePhoneNumberChange = (e: any) => {
+    const inputValue: string = e.target.value;
+    const formattedPhoneNumber: string = formatPhoneNumber(inputValue);
+    setPhoneNumber(formattedPhoneNumber);
+  };
+
+  const handleSubmitUpdate: any = async (datas: any) => {
+    const token = localStorage.getItem("MotorShopToken");
+    let newData: any = {
+      name: datas.name,
+      email: datas.email.toLowerCase(),
+      phone_number: datas.phone_number,
+      birthdate: datas.birthdate,
+    };
+    if (descriptionUpdate !== "") {
+      newData.description = descriptionUpdate;
+    }
+    if (datas.email.toLowerCase() === usrInf.email) {
+      delete newData.email;
+    }
+    if (datas.phone_number === usrInf.phone_number) {
+      delete newData.phone_number;
+    }
+
+    try {
+      const response = await apiLocal.patch(`/user/${usrInf.id}`, newData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      toast.success("Alterações salvas com sucesso", {
+        position: "top-right",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      setModalUpdateOn(!modalUpdateOn);
+      userInfo(usrInf.id);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <ModalEditeUser
@@ -60,7 +126,7 @@ export const ModalUpdateUser = () => {
             x
           </span>
         </div>
-        <form>
+        <form onSubmit={handleSubmit(handleSubmitUpdate)}>
           <div className="containerInputs">
             <h3>Informacôes pessoais</h3>
             <div className="Inputs">
@@ -70,9 +136,9 @@ export const ModalUpdateUser = () => {
                 id="Name"
                 placeholder="Ex: Samuel Leão"
                 defaultValue={usrInf.name}
-                // {...register("name")}
+                {...register("name")}
               />
-              {/* <span className="error">{errors.name?.message}</span> */}
+              <span className="error">{errors.name?.message}</span>
             </div>
             <div className="Inputs">
               <label htmlFor="email">Email</label>
@@ -81,20 +147,9 @@ export const ModalUpdateUser = () => {
                 id="email"
                 placeholder="Ex: samuel@kenzie.com.br"
                 defaultValue={usrInf.email}
-                // {...register("email")}
+                {...register("email")}
               />
-              {/* <span className="error">{errors.email?.message}</span> */}
-            </div>
-            <div className="Inputs">
-              <label htmlFor="CPF">CPF</label>
-              <input
-                type="text"
-                id="CPF"
-                placeholder="000.000.000-00"
-                defaultValue={usrInf.cpf}
-                // {...register("cpf")}
-              />
-              {/* <span className="error">{errors.cpf?.message}</span> */}
+              <span className="error">{errors.email?.message}</span>
             </div>
             <div className="Inputs">
               <label htmlFor="telephone">Celular</label>
@@ -103,9 +158,11 @@ export const ModalUpdateUser = () => {
                 id="telephone"
                 placeholder="(DDD) 90000-0000"
                 defaultValue={usrInf.phone_number}
-                // {...register("phone_number")}
+                {...register("phone_number")}
+                value={phoneNumber}
+                onChange={handlePhoneNumberChange}
               />
-              {/* <span className="error">{errors.phone_number?.message}</span> */}
+              <span className="error">{errors.phone_number?.message}</span>
             </div>
             <div className="Inputs">
               <label htmlFor="birthdate">Data de nascimento</label>
@@ -114,9 +171,9 @@ export const ModalUpdateUser = () => {
                 id="birthdate"
                 placeholder="00/00/00"
                 defaultValue={usrInf.birthdate}
-                // {...register("birthdate")}
+                {...register("birthdate")}
               />
-              {/* <span className="error">{errors.birthdate?.message}</span> */}
+              <span className="error">{errors.birthdate?.message}</span>
             </div>
             <div className="Inputs">
               <label htmlFor="description">Descrição</label>
@@ -125,22 +182,108 @@ export const ModalUpdateUser = () => {
                 id="descripition"
                 wrap="soft"
                 defaultValue={usrInf.description}
-                // onChange={(e) => setDescription(e.target.value)}
+                onChange={(e) => setDescriptionUpdate(e.target.value)}
               />
             </div>
           </div>
           <div className="buttons">
-            <button
+            <ButtonStandard
+              bg="--Grey-5"
+              color="--Grey-1"
+              colorBorder="--Grey-5"
+              HoverColorBorder="--Grey-4"
+              HoverBgBorder="--Grey-4"
               type="button"
               onClick={() => setModalUpdateOn(!modalUpdateOn)}
             >
               Cancelar{" "}
-            </button>
-            <button>Deletar</button>
-            <button type="submit">Salvar alteraçoes</button>
+            </ButtonStandard>
+            <ButtonStandard
+              bg="--alert2"
+              color="--alert1"
+              colorBorder="--alert2"
+              HoverColorBorder="--alert1"
+              onClick={() => {
+                setModalDeleteOn(!modalDeleteOn);
+                setModalUpdateOn(!modalUpdateOn);
+              }}
+            >
+              Deletar
+            </ButtonStandard>
+            <ButtonStandard
+              type="submit"
+              bg="--brand1"
+              color="--Grey-10"
+              colorBorder="--brand1"
+              HoverColorBorder="--brand1"
+              HoverBgBorder="--brand1"
+            >
+              Salvar alteraçoes
+            </ButtonStandard>
           </div>
         </form>
       </div>
     </ModalEditeUser>
+  );
+};
+
+export const ModalDeleteUser = () => {
+  const { navigate, usrInf,setUserInf, modalDeleteOn, setModalDeleteOn } =
+    useContext(GlobalContext);
+
+  const handleSubmitDeleteUser= async () => {
+    const token = localStorage.getItem("MotorShopToken");
+    try {
+      const response = await apiLocal.delete(`/user/${usrInf.id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      toast.success("Conta excluída com sucesso", {
+        position: "top-right",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      localStorage.removeItem("MotorShopToken");
+      setUserInf("")
+      navigate("/")
+      setModalDeleteOn(false)
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  return (
+    <ModalUserDelete>
+      <div className="container">
+        <h2>Você deseja mesmo Deletar sua conta?</h2>
+        <div className="buttons">
+          <ButtonStandard
+            bg="--alert1"
+            color="--Grey-10"
+            colorBorder="--alert2"
+            HoverColorBorder="--alert1"
+            onClick={handleSubmitDeleteUser}
+          >
+            Sim
+          </ButtonStandard>
+          <ButtonStandard
+            type="submit"
+            bg="--brand1"
+            color="--Grey-10"
+            colorBorder="--brand1"
+            HoverColorBorder="--brand1"
+            HoverBgBorder="--brand1"
+            onClick={() => setModalDeleteOn(!modalDeleteOn)}
+          >
+            Não
+          </ButtonStandard>
+        </div>
+      </div>
+    </ModalUserDelete>
   );
 };

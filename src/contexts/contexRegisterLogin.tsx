@@ -10,7 +10,6 @@ export const RegisterLoginContext = createContext<ContexRegisterLoginData>(
 );
 
 export const RegisterLoginProvider = () => {
-
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState<boolean>(false);
@@ -21,12 +20,10 @@ export const RegisterLoginProvider = () => {
     setLoading(true);
     let newData = {
       email: datas.email.toLowerCase(),
-      password: datas.password
-    }
+      password: datas.password,
+    };
     try {
-      console.log(datas);
-      const response = await apiLocal.post(`/login`,newData);
-      console.log(response.data)
+      const response = await apiLocal.post(`/login`, newData);
       localStorage.setItem("MotorShopToken", response.data.token);
       toast.success("Login feito com Sucesso", {
         position: "top-right",
@@ -38,10 +35,64 @@ export const RegisterLoginProvider = () => {
         progress: undefined,
         theme: "dark",
       });
-      navigate("/")
-    } catch (error) {
+      navigate("/");
+    } catch (error: any) {
       console.log(error);
-      toast.error("Emailou senhas Incorretas", {
+      const erroMenssge = error.response.data.message;
+      if (erroMenssge === "Invalid credentials") {
+        toast.error("E-mail ou senhas Incorretas", {
+          position: "top-right",
+          autoClose: 1500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      } else {
+        toast.error("Algo deu errado 😅 ", {
+          position: "top-right",
+          autoClose: 1500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSubmitRegister: SubmitHandler<any> = async (datas) => {
+    setLoading(true);
+    let newData: any = {
+      name: datas.name,
+      email: datas.email.toLowerCase(),
+      cpf: datas.cpf,
+      phone_number: datas.phone_number,
+      address: {
+        cep: datas.cep,
+        state: datas.state,
+        city: datas.city,
+        street: datas.street,
+        number: datas.number,
+      },
+      birthdate: datas.birthdate,
+      password: datas.password,
+    };
+    if (description !== "") {
+      newData.description = description;
+    }
+    if (complement !== "") {
+      newData.address.complement = complement;
+    }
+    try {
+      const response = await apiLocal.post(`/users`, newData);
+      toast.success("Usuário Criado com sucesso", {
         position: "top-right",
         autoClose: 1500,
         hideProgressBar: false,
@@ -51,44 +102,66 @@ export const RegisterLoginProvider = () => {
         progress: undefined,
         theme: "dark",
       });
+      navigate("/Login");
+      let loginData = {
+        email: newData.email,
+        password: newData.password,
+      };
+      handleSubmitLogin(loginData);
+    } catch (error: any) {
+      console.log(error);
+      const erroMenssge = error.response.data.message;
+      console.log(erroMenssge);
+      if (erroMenssge === "Email already exists") {
+        toast.error("Este email já está cadastrado ", {
+          position: "top-right",
+          autoClose: 2500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      } else if (erroMenssge === "CPF already exists") {
+        toast.error("Esse CPF já pertence a outro usuário", {
+          position: "top-right",
+          autoClose: 2500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      } else if (erroMenssge === "This number already exists") {
+        toast.error("Este Numero de Celular já este cadastrado", {
+          position: "top-right",
+          autoClose: 2500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      } else {
+        toast.error("Algo deu errado 😅 ", {
+          position: "top-right",
+          autoClose: 1500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      }
     } finally {
       setLoading(false);
     }
   };
 
-  const handleSubmitRegister: SubmitHandler<any> = async (datas) => {
-    setLoading(true);
-    let newData:any = {
-      name: datas.name,
-      email: datas.email.toLowerCase(),
-      cpf: datas.cpf,
-      phone_number: datas.phone_number,
-      address:{
-        cep: datas.cep,
-        state: datas.state,
-        city: datas.city,
-        street: datas.street,
-        number: datas.number,
-      },
-      birthdate: datas.birthdate,
-      password: datas.password
-    };
-    if (description !== "") {
-      newData.description = description;
-    }
-    if (complement !== "") {
-      newData.address.complement = complement;
-    }
-    try {
-      console.log(newData)
-      const response = await apiLocal.post(`/users`,newData);
-      console.log(response)
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <RegisterLoginContext.Provider
@@ -100,7 +173,7 @@ export const RegisterLoginProvider = () => {
         setDescription,
         complement,
         setComplement,
-        navigate
+        navigate,
       }}
     >
       <Outlet />

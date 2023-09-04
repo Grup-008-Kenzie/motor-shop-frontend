@@ -3,6 +3,7 @@ import Logo from "../../assets/logo.svg";
 import { ButtonStandard } from "../../styles/buttons";
 import { useContext } from "react";
 import { GlobalContext } from "../../contexts/contextGlobal";
+import { useLocation } from "react-router-dom";
 
 export const Header = () => {
   const {
@@ -15,10 +16,31 @@ export const Header = () => {
     setModalUpdateOn,
   } = useContext(GlobalContext);
 
-  console.log(usrInf);
+
   const toggleMenu = () => {
     setHamburgerOpen(!hamburgeropen);
   };
+
+  const location = useLocation();
+
+  const getCurrentPage = () => {
+    const { pathname } = location;
+    switch (pathname) {
+      case '/':
+        return 'Home';
+      case '/Login':
+        return 'Login';
+      case '/Register':
+        return 'Register';
+      case '/Profile':
+        return 'Profile';
+      // Adicione outros casos para outras páginas, se necessário
+      default:
+        return 'Unknown';
+    }
+  };
+
+  const resultPage = getCurrentPage()
   return (
     <HeaderStyled>
       <div className="Logo" onClick={() => navigate("/")}>
@@ -58,7 +80,7 @@ export const Header = () => {
           <span>{usrInf.name}</span>
           <div className="navUser">
             <ul>
-              <li onClick={() => navigate("/Profile")}>Meu Perfil</li>
+              {resultPage === "Profile"? <li onClick={() => navigate("/")}>Home</li>:<li onClick={() => navigate("/Profile")}>Meu Perfil</li>}
               <li onClick={() => setModalUpdateOn(!modalUpdateOn)}>
                 Editar Perfil
               </li>

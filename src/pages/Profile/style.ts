@@ -21,7 +21,7 @@ export const ProfilePageStyle = styled.div`
     padding: 50px;
     gap: 1.6rem;
     border-radius: 4px;
-    .avatarUser:hover span{
+    .avatarUser:hover span {
       display: flex;
     }
     .avatarUser {
@@ -57,6 +57,21 @@ export const ProfilePageStyle = styled.div`
       height: 100px;
       border-radius: 50%;
     }
+    button {
+      padding: 12px 22px;
+      background-color: transparent;
+      border: 2px solid var(--brand1);
+      color: var(--brand1);
+      border-radius: 4px;
+      transition: all ease-in 0.2s;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: var(--brand1);
+      color: #ffffff;
+    }
   }
 
   .info-profile {
@@ -81,22 +96,6 @@ export const ProfilePageStyle = styled.div`
   p {
     font-size: 18px;
     color: var(--Grey-2);
-  }
-
-  button {
-    padding: 12px 22px;
-    background-color: transparent;
-    border: 2px solid var(--brand1);
-    color: var(--brand1);
-    border-radius: 4px;
-    transition: all ease-in 0.2s;
-    font-size: 16px;
-    cursor: pointer;
-  }
-
-  button:hover {
-    background-color: var(--brand1);
-    color: #ffffff;
   }
 
   @media (max-width: 800px) {

@@ -18,6 +18,8 @@ export interface ContexGlobalData {
   setUserInf: any;
   modalUpdateOn: boolean;
   setModalUpdateOn: Dispatch<SetStateAction<boolean>>;
+  modalDeleteOn: boolean;
+  setModalDeleteOn: Dispatch<SetStateAction<boolean>>;
 }
 
 export interface ContexRegisterLoginData {
@@ -49,4 +51,11 @@ export interface RegisterFormData {
   number: string;
   password: string;
   passwordConfirmation: string;
+}
+
+export interface UpdateFormData {
+  name: string;
+  email: string;
+  birthdate: string;
+  phone_number: string;
 }

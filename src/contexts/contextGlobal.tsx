@@ -13,6 +13,7 @@ export const GlobalProvider = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [usrInf, setUserInf] = useState<any>("");
   const [modalUpdateOn, setModalUpdateOn] = useState<boolean>(false);
+  const [modalDeleteOn, setModalDeleteOn] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const token = localStorage.getItem("MotorShopToken");
@@ -25,9 +26,7 @@ export const GlobalProvider = () => {
 
   const userInfo: any = async (idUser: string) => {
     try {
-      console.log(idUser);
       const response = await apiLocal.get(`/user/${idUser}`);
-      console.log(response.data);
       setUserInf(response.data);
     } catch (error) {
       console.log(error);
@@ -40,7 +39,6 @@ export const GlobalProvider = () => {
   useEffect(() => {
     if (token) {
       var decoded: any = jwt_decode(token);
-      console.log(decoded.id);
       userInfo(decoded.id);
     }
   }, []);
@@ -58,6 +56,8 @@ export const GlobalProvider = () => {
         setUserInf,
         modalUpdateOn,
         setModalUpdateOn,
+        modalDeleteOn,
+        setModalDeleteOn,
       }}
     >
       <Outlet />

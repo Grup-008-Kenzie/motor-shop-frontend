@@ -23,8 +23,8 @@ export const ModalEditeUser = styled.div`
     justify-content: space-around;
     width: 520px;
     max-width: 98%;
-    height: max-content;
-    max-height: 98%;
+    height: 90%;
+    max-height: max-content;
     background-color: var(--WhiteFixed);
     border-radius: 8px;
     padding: 24px;
@@ -120,48 +120,12 @@ export const ModalEditeUser = styled.div`
         }
       }
     }
-    .buttons {
+    .buttons{
       display: flex;
       justify-content: space-around;
       margin-top: 25px;
       height: 48px;
-      font-weight: 500;
-      font-size: 1rem;
-    }
-  }
-`;
-
-export const ModalUserDelete = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100vh;
-  max-height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: rgba(150, 150, 150, 60%);
-  display: flex;
-  z-index: 5;
-  .container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 520px;
-    background-color: var(--WhiteFixed);
-    border-radius: 8px;
-    padding: 24px;
-    gap: 25px;
-    align-items: center;
-    .buttons {
-      display: flex;
-      justify-content: space-around;
-      gap: 20px;
-      width: 100%;
-      button {
-        width: 100%;
-      }
+      
     }
   }
 `;

@@ -57,6 +57,7 @@ export const HeaderStyled = styled.header`
         align-items: center;
         padding: 15px;
         min-width: 170px;
+        background-color: var(--Grey-10);
       }
       li {
         cursor: pointer;

@@ -76,6 +76,12 @@ export const FormCreateAnnouncementStyle = styled.form`
     width: 320px;
     padding: 3px 8px;
     text-align: left;
+    padding:12px 20px 12px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    color: var(--brand1);
+    font-size: 0.875rem;
+    font-weight: 600;
   }
   .button-container {
     display: flex;
@@ -83,17 +89,23 @@ export const FormCreateAnnouncementStyle = styled.form`
     gap: 1rem;
 
     .cancel-button {
+      padding: 12px 28px 12px 28px;
       background-color: var(--Grey-6);
       border: 2px solid var(--Grey-6);
+      border-radius: 4px;
       color: var(--Grey-2);
       font-weight: bold;
+      cursor: pointer;
     }
 
     .create-button {
+      padding: 12px 28px 12px 28px;
+      border-radius: 4px;
       background-color: var(--brand1);
       border: 2px solid var(--brand1);
       color: var(--WhiteFixed);
       font-weight: bold;
+      cursor: pointer;
     }
   }
 `;
