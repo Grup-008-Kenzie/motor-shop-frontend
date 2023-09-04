@@ -2,10 +2,23 @@ import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
 import { ListCarProfile } from "../../components/ListCarsProfile";
 import { ModalCreateAnnouncement } from "../../components/modal/modalCreateAnnouncement";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ProfilePageStyle } from "./style";
+import { GlobalContext } from "../../contexts/contextGlobal";
+import { ModalDeleteUser, ModalUpdateUser } from "../../components/modal/modalEditUser";
 
 export const ProfilePage = () => {
+  const { navigate,modalDeleteOn, usrInf, modalUpdateOn, setModalUpdateOn } = useContext(GlobalContext);
+  const token = localStorage.getItem("MotorShopToken");
+
+  modalUpdateOn ? document.body.classList.add("modal-open"): document.body.classList.remove("modal-open");
+
+  useEffect(()=>{
+    if(!token){
+      navigate("/")
+    }
+  },[])
+
   const [showModalCreateAnnoucement, setShowModalCreateAnnoucement] =
     useState<boolean>(false);
 
@@ -13,24 +26,25 @@ export const ProfilePage = () => {
     setShowModalCreateAnnoucement(!showModalCreateAnnoucement);
   };
 
+
+  showModalCreateAnnoucement? document.body.classList.add("modal-open"): document.body.classList.remove("modal-open");
+  
   return (
     <ProfilePageStyle>
+      {modalUpdateOn? <ModalUpdateUser/>: null}
+      {modalDeleteOn? <ModalDeleteUser/>: null}
       <Header />
       <div className="subheader-blue"></div>
       <div className="container-profile">
-        <img
-          src="https://ca.slack-edge.com/TQZR39SET-U03Q1QHRQ13-1162fb4ce9d3-512"
-          alt=""
-        />
+        <div className="avatarUser">
+          <span onClick={()=> setModalUpdateOn(!modalUpdateOn)}>Editar perfil</span>
+          {usrInf === ""? "":usrInf.name[0].toUpperCase()}
+          </div>
         <div className="info-profile">
-          <h3>Samuel Leão</h3>
+          <h3>{usrInf === ""? "":usrInf.name}</h3>
           <p>Anunciante</p>
         </div>
-        <p>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s
-        </p>
+        <p>{usrInf === ""? "":usrInf.description}</p>
         <button onClick={() => ToggleShowModal()}>Criar anuncio</button>
       </div>
 

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const FormLoginStyled = styled.form`
-  margin-top: 100px;
+  margin-top: 50px;
   display: flex;
   flex-direction: column;
   background-color: var(--Grey-10);
@@ -10,6 +10,7 @@ export const FormLoginStyled = styled.form`
   width: 550px;
   max-width: 100%;
   gap: 32px;
+  height: max-content;
   h2 {
     font-size: 1.5rem;
     font-weight: 700;
@@ -38,14 +39,18 @@ export const FormLoginStyled = styled.form`
         outline: none;
       }
     }
+    span:hover{
+      color: var(--Grey-2);
+    }
     span {
       display: flex;
       width: 100%;
       justify-content: end;
-      color: var(--Grey-2);
+      color: var(--Grey-3);
       font-size: 0.875rem;
       font-family: "Inter", sans-serif;
       font-weight: 500;
+      cursor: pointer;
     }
   }
   .buttonsLogin {
@@ -80,7 +85,7 @@ export const FormLoginStyled = styled.form`
     }
   }
   @media (max-width: 850px){
-    width: 95%;
+    width: 98%;
   }
 `;
 

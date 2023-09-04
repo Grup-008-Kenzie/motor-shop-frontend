@@ -9,7 +9,14 @@ import { RegisterLoginContext } from "../../contexts/contexRegisterLogin";
 import { RegisterFormData } from "../../@types/types";
 
 export const FormRegister = () => {
-  const { handleSubmitRegister, loading , description, setDescription, complement, setComplement} = useContext(RegisterLoginContext);
+  const {
+    handleSubmitRegister,
+    loading,
+    description,
+    setDescription,
+    complement,
+    setComplement,
+  } = useContext(RegisterLoginContext);
 
   const [inputValueCep, setInputValueCep] = useState("");
   const [cepInfo, setCepInfo] = useState({
@@ -20,6 +27,29 @@ export const FormRegister = () => {
     uf: null,
   });
   const [errorCep, seterrorCep] = useState(false);
+  const [cpfFormt, setCpfFormat] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState<string>("");
+
+  const formatCpf = (value: string): string => {
+    const cleanedValue: string = value.replace(/\D/g, "");
+
+    const formattedValue: string = cleanedValue
+      .slice(0, 11) 
+      .replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+
+    return formattedValue;
+  };
+  const formatPhoneNumber = (value: string): string => {
+    const cleanedValue: string = value.replace(/\D/g, "");
+
+    const formattedValue: string = cleanedValue.replace(
+      /^(\d{2})(\d{1,5})(\d{0,4})$/,
+      "($1) $2-$3"
+    );
+
+    return formattedValue;
+  };
+
 
   const handleInputChange = async (
     event: React.ChangeEvent<HTMLInputElement>
@@ -55,7 +85,9 @@ export const FormRegister = () => {
     email: yup.string().required("Email Obrigatório").email(),
     birthdate: yup.string().required("O campo de data não pode ficar vazio"),
     cpf: yup.string().required("O CPF não pode ficar vazio"),
-    phone_number: yup.string().required("O campo de Celular não pode ficar vazio"),
+    phone_number: yup
+      .string()
+      .required("O campo de Celular não pode ficar vazio"),
     cep: yup.string().required("O campo Cep não pode ficar vazio"),
     state: yup.string().required("O campo de Estado não pode ficar vazio"),
     city: yup.string().required("O campo de Cidade não pode ficar vazio"),
@@ -68,9 +100,25 @@ export const FormRegister = () => {
       .required("Esse campo não pode ficar vazio"),
   });
 
-  const { register, handleSubmit, formState: { errors },} = useForm<RegisterFormData>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<RegisterFormData>({
     resolver: yupResolver(formSchema),
   });
+
+  const handleCpfChange = (e:any) => {
+    const inputValue: string = e.target.value;
+    const formattedCpf: string = formatCpf(inputValue);
+    setCpfFormat(formattedCpf);
+  };
+
+  const handlePhoneNumberChange = (e: any) => {
+    const inputValue: string = e.target.value;
+    const formattedPhoneNumber: string = formatPhoneNumber(inputValue);
+    setPhoneNumber(formattedPhoneNumber);
+  };
 
   return (
     <FormRegisterStyled onSubmit={handleSubmit(handleSubmitRegister)}>
@@ -104,6 +152,8 @@ export const FormRegister = () => {
             id="CPF"
             placeholder="000.000.000-00"
             {...register("cpf")}
+            value={cpfFormt}
+            onChange={handleCpfChange}
           />
           <span className="error">{errors.cpf?.message}</span>
         </div>
@@ -114,6 +164,8 @@ export const FormRegister = () => {
             id="telephone"
             placeholder="(DDD) 90000-0000"
             {...register("phone_number")}
+            value={phoneNumber}
+            onChange={handlePhoneNumberChange}
           />
           <span className="error">{errors.phone_number?.message}</span>
         </div>
@@ -163,7 +215,7 @@ export const FormRegister = () => {
               id="state"
               placeholder="Digitar Estado"
               value={cepInfo.uf === null ? "" : cepInfo.uf}
-              {...register("state")}
+              {...register("state", { shouldUnregister: false })}
             />
             <span className="error">{errors.state?.message}</span>
           </div>
@@ -175,6 +227,7 @@ export const FormRegister = () => {
               placeholder="Digitar cidade"
               value={cepInfo.localidade === null ? "" : cepInfo.localidade}
               {...register("city")}
+              defaultValue={"oi"}
             />
             <span className="error">{errors.city?.message}</span>
           </div>
@@ -186,7 +239,7 @@ export const FormRegister = () => {
             id="street"
             placeholder="Digitar Nome da Rua"
             value={cepInfo.logradouro === null ? "" : cepInfo.logradouro}
-            {...register("street")}
+            {...register("street", { shouldUnregister: false })}
           />
           <span className="error">{errors.street?.message}</span>
         </div>

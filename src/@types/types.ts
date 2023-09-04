@@ -13,16 +13,24 @@ export interface ContexGlobalData {
   navigate: NavigateFunction;
   setLoading: Dispatch<SetStateAction<boolean>>;
   loading: boolean;
+  userInfo: any;
+  usrInf: any;
+  setUserInf: any;
+  modalUpdateOn: boolean;
+  setModalUpdateOn: Dispatch<SetStateAction<boolean>>;
+  modalDeleteOn: boolean;
+  setModalDeleteOn: Dispatch<SetStateAction<boolean>>;
 }
 
 export interface ContexRegisterLoginData {
   loading: boolean;
   handleSubmitLogin: SubmitHandler<UserFormData>;
   handleSubmitRegister: SubmitHandler<any>;
-  description: string
-  setDescription:Dispatch<SetStateAction<string>>
-  complement: string
-  setComplement: Dispatch<SetStateAction<string>>
+  description: string;
+  setDescription: Dispatch<SetStateAction<string>>;
+  complement: string;
+  setComplement: Dispatch<SetStateAction<string>>;
+  navigate: NavigateFunction;
 }
 
 export interface UserFormData {
@@ -43,4 +51,11 @@ export interface RegisterFormData {
   number: string;
   password: string;
   passwordConfirmation: string;
+}
+
+export interface UpdateFormData {
+  name: string;
+  email: string;
+  birthdate: string;
+  phone_number: string;
 }

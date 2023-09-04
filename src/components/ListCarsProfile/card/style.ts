@@ -72,6 +72,11 @@ export const StyledCardProfile = styled.li`
     gap: 2rem;
   }
   .button-container button {
+    padding: 12px 22px;
+    background-color: transparent;
+    border-radius: 4px;
+    transition: all ease-in 0.2s;
+    cursor: pointer;
     border: 2px solid var(--Grey-0);
     color: var(--Grey-0);
   }
