@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import { ContexGlobalData } from "../@types/types";
+import { ContexGlobalData, IAnnoucementRequest } from "../@types/types";
 import { apiCarsTable, apiLocal } from "../services/api";
 import jwt_decode from "jwt-decode";
 
@@ -43,6 +43,19 @@ export const GlobalProvider = () => {
     }
   }, []);
 
+  const createAnnoucement = async (FormData: IAnnoucementRequest) => {
+    try {
+      const response = await apiLocal.post(
+        "/announcements",
+        FormData,
+        headerApi
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <GlobalContext.Provider
       value={{
@@ -58,6 +71,7 @@ export const GlobalProvider = () => {
         setModalUpdateOn,
         modalDeleteOn,
         setModalDeleteOn,
+        createAnnoucement,
       }}
     >
       <Outlet />
