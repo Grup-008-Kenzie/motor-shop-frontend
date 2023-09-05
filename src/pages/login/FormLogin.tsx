@@ -29,9 +29,11 @@ export const FormLogin = () => {
   });
   const handleRecoverPassword = async (event: any) => {
     event.preventDefault();
-
+    let newData = {
+      email: emailValue.toLowerCase()
+    }
     try {
-      const response = await apiLocal.post(`/users/resetPassword`, emailValue.toLowerCase());
+      const response = await apiLocal.post(`/users/resetPassword`, newData);
       console.log(response)
       toast.success("E-mail Enviado com sucesso", {
         position: "top-right",
