@@ -13,6 +13,7 @@ import { useParams } from "react-router-dom";
 import { apiLocal } from "../../services/api";
 import NotFoundGif from "../../assets/notFoud.gif";
 
+
 export const ProfilePage = () => {
   const { navigate, modalDeleteOn, usrInf, modalUpdateOn, setModalUpdateOn } =
     useContext(GlobalContext);
@@ -34,7 +35,6 @@ export const ProfilePage = () => {
       setUserProfile("");
     }
   };
-
   useEffect(() => {
     userInfo();
   }, []);
@@ -49,8 +49,6 @@ export const ProfilePage = () => {
   showModalCreateAnnoucement
     ? document.body.classList.add("modal-open")
     : document.body.classList.remove("modal-open");
-
-
   return (
     <ProfilePageStyle>
       {modalUpdateOn ? <ModalUpdateUser /> : null}
@@ -82,6 +80,7 @@ export const ProfilePage = () => {
               <button onClick={() => ToggleShowModal()}>Criar anuncio</button>
             ) : null}
           </div>
+
 
           <ListCarProfile />
           {showModalCreateAnnoucement ? (

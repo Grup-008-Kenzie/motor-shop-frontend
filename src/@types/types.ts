@@ -20,6 +20,7 @@ export interface ContexGlobalData {
   setModalUpdateOn: Dispatch<SetStateAction<boolean>>;
   modalDeleteOn: boolean;
   setModalDeleteOn: Dispatch<SetStateAction<boolean>>;
+  createAnnoucement: (FormData: IAnnoucementRequest) => Promise<void>;
 }
 
 export interface ContexRegisterLoginData {
@@ -63,4 +64,19 @@ export interface UpdateFormData {
   email: string;
   birthdate: string;
   phone_number: string;
+}
+
+export interface IAnnoucementRequest {
+  year: string;
+  fuel_type: string;
+  kilometer: string;
+  color: string;
+  fipe_price: string;
+  price: string;
+  description: string;
+  brand: string;
+  model: string;
+  front_image: string;
+  first_image?: string;
+  second_image?: string;
 }
