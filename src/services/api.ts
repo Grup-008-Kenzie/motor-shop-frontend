@@ -12,5 +12,5 @@ export const apiCep = axios.create({
 
 export const apiLocal = axios.create({
     baseURL: "http://localhost:3001",
-    timeout: 25000
+    timeout: 250000
 })

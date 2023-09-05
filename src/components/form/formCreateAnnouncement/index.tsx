@@ -25,9 +25,7 @@ export const FormCreateAnnouncement = ({ ToggleShowModal }: IProps) => {
   const [imageLinks, setImageLinks] = useState(["", ""]);
   const { register, handleSubmit } = useForm();
 
-  console.log(modelPriceFibe);
 
-  console.log(model);
   useEffect(() => {
     const BrandListing = async () => {
       const brandsList = await apiCarsTable.get("/cars");

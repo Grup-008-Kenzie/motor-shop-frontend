@@ -38,6 +38,11 @@ export interface UserFormData {
   password: string;
 }
 
+export interface PasswordRecoveryData {
+  password: string;
+  passwordConfirmation: string;
+}
+
 export interface RegisterFormData {
   name: string;
   email: string;
