@@ -5,19 +5,25 @@ import { ModalCreateAnnouncement } from "../../components/modal/modalCreateAnnou
 import { useContext, useEffect, useState } from "react";
 import { ProfilePageStyle } from "./style";
 import { GlobalContext } from "../../contexts/contextGlobal";
-import { ModalDeleteUser, ModalUpdateUser } from "../../components/modal/modalEditUser";
+import {
+  ModalDeleteUser,
+  ModalUpdateUser,
+} from "../../components/modal/modalEditUser";
 
 export const ProfilePage = () => {
-  const { navigate,modalDeleteOn, usrInf, modalUpdateOn, setModalUpdateOn } = useContext(GlobalContext);
+  const { navigate, modalDeleteOn, usrInf, modalUpdateOn, setModalUpdateOn } =
+    useContext(GlobalContext);
   const token = localStorage.getItem("MotorShopToken");
 
-  modalUpdateOn ? document.body.classList.add("modal-open"): document.body.classList.remove("modal-open");
+  modalUpdateOn
+    ? document.body.classList.add("modal-open")
+    : document.body.classList.remove("modal-open");
 
-  useEffect(()=>{
-    if(!token){
-      navigate("/")
+  useEffect(() => {
+    if (!token) {
+      navigate("/");
     }
-  },[])
+  }, []);
 
   const [showModalCreateAnnoucement, setShowModalCreateAnnoucement] =
     useState<boolean>(false);
@@ -26,25 +32,28 @@ export const ProfilePage = () => {
     setShowModalCreateAnnoucement(!showModalCreateAnnoucement);
   };
 
+  showModalCreateAnnoucement
+    ? document.body.classList.add("modal-open")
+    : document.body.classList.remove("modal-open");
 
-  showModalCreateAnnoucement? document.body.classList.add("modal-open"): document.body.classList.remove("modal-open");
-  
   return (
     <ProfilePageStyle>
-      {modalUpdateOn? <ModalUpdateUser/>: null}
-      {modalDeleteOn? <ModalDeleteUser/>: null}
+      {modalUpdateOn ? <ModalUpdateUser /> : null}
+      {modalDeleteOn ? <ModalDeleteUser /> : null}
       <Header />
       <div className="subheader-blue"></div>
       <div className="container-profile">
         <div className="avatarUser">
-          <span onClick={()=> setModalUpdateOn(!modalUpdateOn)}>Editar perfil</span>
-          {usrInf === ""? "":usrInf.name[0].toUpperCase()}
-          </div>
+          <span onClick={() => setModalUpdateOn(!modalUpdateOn)}>
+            Editar perfil
+          </span>
+          {usrInf === "" ? "" : usrInf.name[0].toUpperCase()}
+        </div>
         <div className="info-profile">
-          <h3>{usrInf === ""? "":usrInf.name}</h3>
+          <h3>{usrInf === "" ? "" : usrInf.name}</h3>
           <p>Anunciante</p>
         </div>
-        <p>{usrInf === ""? "":usrInf.description}</p>
+        <p>{usrInf === "" ? "" : usrInf.description}</p>
         <button onClick={() => ToggleShowModal()}>Criar anuncio</button>
       </div>
 
