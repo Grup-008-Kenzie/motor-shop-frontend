@@ -6,6 +6,7 @@ import { Register } from "../pages/Register";
 import { RegisterLoginProvider } from "../contexts/contexRegisterLogin";
 import { ProfilePage } from "../pages/Profile";
 import { ProductPage } from "../pages/Product";
+import { NotFound } from "../pages/notFound";
 
 export const RoutesMain = () => {
   return (
@@ -21,6 +22,7 @@ export const RoutesMain = () => {
           <Route path="/productPage" element={<ProductPage />} />
         </Route>
       </Route>
+      <Route path="*" element={<NotFound/>}/>
     </Routes>
   );
 };

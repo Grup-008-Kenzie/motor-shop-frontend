@@ -5,6 +5,7 @@ interface StyledButtonProps {
   color?: string;
   colorBorder?: string;
   HoverColorBorder?: string;
+  HoverBgBorder?: string;
 }
 
 export const ButtonStandard = styled.button<StyledButtonProps>`
@@ -13,7 +14,7 @@ export const ButtonStandard = styled.button<StyledButtonProps>`
   justify-content: center;
   flex-wrap: nowrap;
   max-width: 100%;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-weight: 600;
   font-size: 1rem;
   border-radius: 5px;
@@ -23,7 +24,8 @@ export const ButtonStandard = styled.button<StyledButtonProps>`
   padding: 12px 28px 12px 28px;
   cursor: pointer;
   transition: 0.8s;
-  &:hover{
+  &:hover {
     border: 2px solid var(${(props) => props.HoverColorBorder || "--Grey-0"});
+    background-color: var(${(props) => props.HoverBgBorder || "none"});
   }
 `;

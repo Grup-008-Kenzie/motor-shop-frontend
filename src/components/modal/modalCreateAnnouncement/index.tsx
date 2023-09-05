@@ -12,7 +12,7 @@ export const ModalCreateAnnouncement = ({ ToggleShowModal }: IProps) => {
         <div className="header-modal-card">
           <p>Criar Anuncio</p>
           <button className="button-close" onClick={() => ToggleShowModal()}>
-            x
+            X
           </button>
         </div>
         <FormCreateAnnouncement ToggleShowModal={ToggleShowModal} />

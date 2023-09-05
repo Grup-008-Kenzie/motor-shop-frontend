@@ -7,6 +7,17 @@ export const StyledCardProfile = styled.li`
   width: 20%;
   margin-bottom: 50px;
 
+  @media (max-width: 1000px) {
+    width: 45%;
+  }
+
+  @media (max-width: 800px) {
+    width: 45%;
+  }
+
+  @media (max-width: 800px) {
+    width: 90%;
+  }
   .image-container {
     background-color: var(--Grey-7);
     position: relative;
@@ -61,6 +72,11 @@ export const StyledCardProfile = styled.li`
     gap: 2rem;
   }
   .button-container button {
+    padding: 12px 22px;
+    background-color: transparent;
+    border-radius: 4px;
+    transition: all ease-in 0.2s;
+    cursor: pointer;
     border: 2px solid var(--Grey-0);
     color: var(--Grey-0);
   }
