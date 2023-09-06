@@ -34,7 +34,7 @@ export const CommentsComponentStyle = styled.ul`
         width: 32px;
         height: 32px;
         border-radius: 50%;
-        background-color: var(--brand1);
+        background-color: var(--brand3);
         text-align: center;
         font-size: 16px;
         font-weight: 600;
