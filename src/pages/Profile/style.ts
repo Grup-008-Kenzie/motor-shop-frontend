@@ -1,11 +1,26 @@
 import { styled } from "styled-components";
-
 export const ProfilePageStyle = styled.div`
-  background-color: var(--Grey-7);
+background-color: var(--Grey-7);
+  .notUser{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    gap: 25px;
+    height: 100vh;
+    max-height: 100%;
+    width: 100%;
+    background-color: var(--WhiteFixed);
+    h2{
+      font-size: 1.5rem;
+      color: #0BB5C8;
+    }
+  }
   .subheader-blue {
     width: 100%;
     height: 300px;
     background-color: var(--brand1);
+    
   }
 
   .container-profile {

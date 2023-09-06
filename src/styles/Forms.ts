@@ -11,6 +11,7 @@ export const FormLoginStyled = styled.form`
   max-width: 100%;
   gap: 32px;
   height: max-content;
+  margin-bottom: 100px;
   h2 {
     font-size: 1.5rem;
     font-weight: 700;
@@ -99,6 +100,7 @@ export const FormRegisterStyled = styled.form`
   width: 550px;
   max-width: 100%;
   gap: 32px;
+  margin-bottom: 100px;
   h2 {
     font-size: 1.5rem;
     font-weight: 700;

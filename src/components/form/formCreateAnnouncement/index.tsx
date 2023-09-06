@@ -1,7 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { FormCreateAnnouncementStyle } from "./style";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { apiCarsTable } from "../../../services/api";
+import { IAnnoucementRequest } from "../../../@types/types";
+import { GlobalContext } from "../../../contexts/contextGlobal";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 interface IProps {
   ToggleShowModal: () => void;
@@ -17,17 +21,34 @@ interface IModel {
 }
 
 export const FormCreateAnnouncement = ({ ToggleShowModal }: IProps) => {
-  const brand = ["chevrolet", "bmw", "mercedes", "vw", "hyundai"];
   const [brands, setBrands] = useState<string[]>([]);
   const [model, setModel] = useState("chevrolet");
   const [modelPriceFibe, setModelPriceFibe] = useState<string>("");
   const [modelList, setModelList] = useState<IModel[]>([]);
   const [imageLinks, setImageLinks] = useState(["", ""]);
-  const { register, handleSubmit } = useForm();
 
-  console.log(modelPriceFibe);
+  const formSchema = yup.object().shape({
+    year: yup.string().required("Ano Obrigatório"),
+    fuel_type: yup.string().required("Combustivel Obrigatório"),
+    kilometer: yup.string().required("kilometragem Obrigatório"),
+    color: yup.string().required("Cor Obrigatório"),
+    fipe_price: yup.string().required(""),
+    price: yup.string().required("Valor Obrigatório"),
+    description: yup.string().required("Descrição Obrigatório"),
+    brand: yup.string().required("Marca Obrigatório"),
+    model: yup.string().required("Modelo Obrigatório"),
+    front_image: yup.string().required("Imagem da capa Obrigatório"),
+    first_image: yup.string(),
+    second_image: yup.string(),
+  });
 
-  console.log(model);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<any>({
+    resolver: yupResolver(formSchema),
+  });
   useEffect(() => {
     const BrandListing = async () => {
       const brandsList = await apiCarsTable.get("/cars");
@@ -37,18 +58,22 @@ export const FormCreateAnnouncement = ({ ToggleShowModal }: IProps) => {
     BrandListing();
   }, []);
 
+  const { createAnnoucement } = useContext(GlobalContext);
+
   useEffect(() => {
     const ModelListing = async () => {
       const modelsListen = await apiCarsTable.get(`/cars?brand=${model}`);
       setModelList(modelsListen.data);
-      console.log(modelsListen.data);
     };
     ModelListing();
   }, [model]);
 
-  const submit = (data: any) => {
-    console.log(data);
-    ToggleShowModal();
+  const submitCreateAnnoucement: SubmitHandler<any> = async (
+    formData: IAnnoucementRequest
+  ) => {
+    console.log(formData);
+    createAnnoucement(formData);
+    return;
   };
 
   const toggleModel = (event: any) => {
@@ -67,7 +92,9 @@ export const FormCreateAnnouncement = ({ ToggleShowModal }: IProps) => {
   };
 
   return (
-    <FormCreateAnnouncementStyle onSubmit={handleSubmit(submit)}>
+    <FormCreateAnnouncementStyle
+      onSubmit={handleSubmit(submitCreateAnnoucement)}
+    >
       <div className="input-container-select">
         <label htmlFor="brand">Marca</label>
         <select id="brand" {...register("brand")} onChange={toggleModel}>
@@ -96,16 +123,16 @@ export const FormCreateAnnouncement = ({ ToggleShowModal }: IProps) => {
           <input type="text" id="year" {...register("year")} />
         </div>
         <div className="input-container">
-          <label htmlFor="combustivel">Combustivel</label>
-          <select id="combustivel" {...register("combustivel")}>
+          <label htmlFor="fuel_type">Combustivel</label>
+          <select id="fuel_type" {...register("fuel_type")}>
             <option value="1">Eletrico</option>
             <option value="2">Flex</option>
             <option value="3">Hibrido</option>
           </select>
         </div>
         <div className="input-container">
-          <label htmlFor="km">quilometragem</label>
-          <input type="text" id="km" {...register("km")} />
+          <label htmlFor="kilometer">quilometragem</label>
+          <input type="text" id="kilometer" {...register("kilometer")} />
         </div>
         <div className="input-container">
           <label htmlFor="color">cor</label>
@@ -127,7 +154,7 @@ export const FormCreateAnnouncement = ({ ToggleShowModal }: IProps) => {
             value={modelPriceFibe}
             id="pricefibe"
             readOnly
-            {...register("pricefibe")}
+            {...register("fipe_price")}
           />
         </div>
         <div className="input-container">
@@ -137,19 +164,19 @@ export const FormCreateAnnouncement = ({ ToggleShowModal }: IProps) => {
       </div>
 
       <div className="desciption-container">
-        <label htmlFor="desc">Descrição</label>
-        <input type="text" id="desc" {...register("desc")} />
+        <label htmlFor="description">Descrição</label>
+        <input type="text" id="description" {...register("description")} />
       </div>
 
       <div className="input-container-url-image">
-        <label htmlFor="imgcover">Imagem da capa</label>
-        <input type="text" id="imgcover" {...register("imgcover")} />
+        <label htmlFor="front_image">Imagem da capa</label>
+        <input type="text" id="front_image" {...register("front_image")} />
       </div>
 
       {imageLinks.map((link, index) => (
         <div className="input-container-url-image">
           <label htmlFor="first-image">{index + 1}° Imagem da galeria</label>
-          <input type="text" id="first-image" {...register("first-image")} />
+          <input type="text" id="first-image" {...register("first_image")} />
         </div>
       ))}
 

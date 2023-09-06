@@ -16,7 +16,7 @@ export const Header = () => {
     setModalUpdateOn,
   } = useContext(GlobalContext);
 
-
+  console.log(usrInf)
   const toggleMenu = () => {
     setHamburgerOpen(!hamburgeropen);
   };
@@ -34,7 +34,6 @@ export const Header = () => {
         return 'Register';
       case '/Profile':
         return 'Profile';
-      // Adicione outros casos para outras páginas, se necessário
       default:
         return 'Unknown';
     }
@@ -74,13 +73,13 @@ export const Header = () => {
         </nav>
       ) : (
         <div className="profileUser">
-          <div className="avatarUser" onClick={() => navigate("/Profile")}>
+          <div className="avatarUser" onClick={() => navigate(`/Profile/${usrInf.id}`)}>
             {usrInf.name[0].toUpperCase()}
           </div>
           <span>{usrInf.name}</span>
           <div className="navUser">
             <ul>
-              {resultPage === "Profile"? <li onClick={() => navigate("/")}>Home</li>:<li onClick={() => navigate("/Profile")}>Meu Perfil</li>}
+              {resultPage === "Profile"? <li onClick={() => navigate("/")}>Home</li>:<li onClick={() => navigate(`/Profile/${usrInf.id}`)}>Meu Perfil</li>}
               <li onClick={() => setModalUpdateOn(!modalUpdateOn)}>
                 Editar Perfil
               </li>
@@ -133,13 +132,13 @@ export const Header = () => {
             </ul>
           ) : (
             <div className="profileUserMobile">
-              <div className="avatarUser" onClick={() => navigate("/Profile")}>
+              <div className="avatarUser" onClick={() => navigate(`/Profile/${usrInf.id}`)}>
                 {usrInf.name[0].toUpperCase()}
               </div>
               <span>{usrInf.name}</span>
               <div className="navUser">
                 <ul>
-                  <li onClick={() => navigate("/Profile")}>Meu Perfil</li>
+                  <li onClick={() => navigate(`/Profile/${usrInf.id}`)}>Meu Perfil</li>
                   <li onClick={() => setModalUpdateOn(!modalUpdateOn)}>
                     Editar Perfil
                   </li>
