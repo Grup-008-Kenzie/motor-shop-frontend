@@ -12,14 +12,14 @@ export const AnnouncementPhotosStyle = styled.div`
     background-color: #ffffff;
     border-radius: 4px;
     padding: 15px;
-    list-style:none;
+    gap: 10px;
+    list-style: none;
     margin-bottom: 20px;
     overflow-y: scroll;
   }
   .container-img {
     width: 90px;
     height: 90px;
-    margin: 10px;
     background-color: var(--Grey-7);
     text-decoration: none;
   }

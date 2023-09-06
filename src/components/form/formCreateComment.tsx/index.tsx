@@ -22,11 +22,16 @@ export const CreateCommentForm = () => {
           <span>SL</span>
           <h5>Samuel Leao</h5>
         </div>
-        <div className="container-comment">
-          <label htmlFor="textarea"></label>
-          <textarea name="" id="" rows={5} cols={50}></textarea>
+        <div className= "input">
+           <textarea placeholder="Digite aqui seu comentário" id="comments" wrap="soft"/>     
+           <button>Comentar</button>
         </div>
-        <button>Comentar</button>
+        <div className="container-span">
+          <span>Gostei Muito</span>
+          <span>Incrivel</span>
+          <span>Recomendei para meus amigos</span>
+        </div>
+        
       </CommentsFormStyle>
     </>
   );

@@ -16,9 +16,10 @@ export const ProductPageStyle = styled.div`
     position: relative;
     top: -450px;
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    flex-direction: row;
     align-items: flex-start;
-    justify-content: center;
+    justify-content: space-between;
     gap: 20px;
     padding: 50px 100px;
 
@@ -108,14 +109,10 @@ export const ProductPageStyle = styled.div`
     }
 
     .container-aside {
-      width: 40%;
+      width: 35%;
       height: auto;
-      position: relative;
-      left: 600px;
-      top: -750px;
     }
     .container-comments {
-      margin-top: -750px;
       width: 60%;
     }
     @media (max-width: 800px) {
@@ -127,12 +124,9 @@ export const ProductPageStyle = styled.div`
       }
       .container-aside {
         min-width: 90%;
-        top: 0;
-        left: 0;
       }
       .container-comments {
         min-width: 90%;
-        margin-top: 100px;
       }
     }
   }
