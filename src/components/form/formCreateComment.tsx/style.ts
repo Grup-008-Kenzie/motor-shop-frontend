@@ -47,5 +47,19 @@ export const CommentsFormStyle = styled.form`
       }
     }
   }
-`;
+  button {
+    padding: 12px 22px;
+    background-color: transparent;
+    border: 2px solid var(--brand4);
+    color: var(--brand1);
+    border-radius: 4px;
+    transition: all ease-in 0.2s;
+    font-size: 16px;
+    cursor: pointer;
+  }
 
+  button:hover {
+    background-color: var(--brand1);
+    color: var(--brand4);
+  }
+`;

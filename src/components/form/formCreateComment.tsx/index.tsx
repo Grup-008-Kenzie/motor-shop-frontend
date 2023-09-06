@@ -26,6 +26,7 @@ export const CreateCommentForm = () => {
           <label htmlFor="textarea"></label>
           <textarea name="" id="" rows={5} cols={50}></textarea>
         </div>
+        <button>Comentar</button>
       </CommentsFormStyle>
     </>
   );
