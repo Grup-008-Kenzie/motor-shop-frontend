@@ -15,8 +15,6 @@ export const Header = () => {
     setUserInf,
     setModalUpdateOn,
   } = useContext(GlobalContext);
-
-  console.log(usrInf)
   const toggleMenu = () => {
     setHamburgerOpen(!hamburgeropen);
   };

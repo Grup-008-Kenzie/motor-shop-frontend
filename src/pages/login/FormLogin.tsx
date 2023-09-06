@@ -20,9 +20,6 @@ export const FormLogin = () => {
     email: yup.string().required("Email obrigadorio").email("Email inválido"),
     password: yup.string().required("Senha obrigadoria"),
   });
-  const formSchemaEmail = yup.object().shape({
-    email: yup.string().required("Email obrigadorio").email("Email inválido"),
-  });
 
   const { register, handleSubmit } = useForm<UserFormData>({
     resolver: yupResolver(formSchema),
@@ -45,6 +42,7 @@ export const FormLogin = () => {
         progress: undefined,
         theme: "dark",
       });
+      setPasswordRecoveryOn(!passwordRecoveryOn)
     } catch (error: any) {
       console.log(error);
       const erroMenssge = error.response.data.message;

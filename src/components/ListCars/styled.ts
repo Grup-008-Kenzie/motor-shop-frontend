@@ -9,7 +9,7 @@ export const CarsListStyle = styled.ul`
   list-style: none;
   width: 100%;
   padding-top: 50px;
-  
+
   .postCar {
     display: flex;
     flex-direction: column;
@@ -18,6 +18,9 @@ export const CarsListStyle = styled.ul`
     img {
       width: 100%;
       background-color: var(--Grey-8);
+      overflow: hidden;
+      object-fit: cover;
+      height: 160px;
     }
     h3 {
       overflow: hidden;
@@ -32,6 +35,25 @@ export const CarsListStyle = styled.ul`
       display: -webkit-box;
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
+    }
+    .userIfor {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      cursor: pointer;
+      .avatarUser {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        background-color: var(--brand1);
+        border-radius: 50%;
+        font-family: "Inter", sans-serif;
+        font-weight: 700;
+        color: var(--WhiteFixed);
+        cursor: pointer;
+      }
     }
     .infonsCar {
       display: flex;
