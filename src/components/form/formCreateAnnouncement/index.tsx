@@ -25,7 +25,7 @@ export const FormCreateAnnouncement = ({ ToggleShowModal }: IProps) => {
   const [model, setModel] = useState("chevrolet");
   const [modelPriceFibe, setModelPriceFibe] = useState<string>("");
   const [modelList, setModelList] = useState<IModel[]>([]);
-  const [imageLinks, setImageLinks] = useState(["", ""]);
+  const [imageLinks, setImageLinks] = useState([""]);
 
   const formSchema = yup.object().shape({
     year: yup.string().required("Ano Obrigatório"),
@@ -72,6 +72,7 @@ export const FormCreateAnnouncement = ({ ToggleShowModal }: IProps) => {
     formData: IAnnoucementRequest
   ) => {
     console.log(formData);
+    ToggleShowModal();
     createAnnoucement(formData);
     return;
   };
@@ -173,9 +174,17 @@ export const FormCreateAnnouncement = ({ ToggleShowModal }: IProps) => {
         <input type="text" id="front_image" {...register("front_image")} />
       </div>
 
+      <div className="input-container-url-image">
+        <label htmlFor="first-image">1° Imagem da galeria</label>
+        <input type="text" id="first-image" {...register("first_image")} />
+      </div>
+      <div className="input-container-url-image">
+        <label htmlFor="second_image">2° Imagem da galeria</label>
+        <input type="text" id="fsecond_image" {...register("second_image")} />
+      </div>
       {imageLinks.map((link, index) => (
         <div className="input-container-url-image">
-          <label htmlFor="first-image">{index + 1}° Imagem da galeria</label>
+          <label htmlFor="first-image">{index + 3}° Imagem da galeria</label>
           <input type="text" id="first-image" {...register("first_image")} />
         </div>
       ))}
