@@ -45,11 +45,11 @@ export const GlobalProvider = () => {
 
   const createAnnoucement = async (FormData: IAnnoucementRequest) => {
     try {
-      const response = await apiLocal.post(
-        "/announcements",
-        FormData,
-        headerApi
-      );
+      const response = await apiLocal.post("/announcements", FormData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       console.log(response.data);
     } catch (error) {
       console.log(error);
