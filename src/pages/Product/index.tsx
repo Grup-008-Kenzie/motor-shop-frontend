@@ -1,59 +1,62 @@
+import { useEffect, useState } from "react";
 import { Header } from "../../components/Header";
+import { ListTest } from "../../components/ListCars/listTest";
+import { CommentsComponent } from "../../components/coments";
+import { ProductPageStyle } from "./style";
+import { Footer } from "../../components/Footer";
+import { AnnouncementPhotosList } from "../../components/annoucementPhotosList";
+import { AnnouncerInfo } from "../../components/announcerInfo";
+import { CreateCommentForm } from "../../components/form/formCreateComment.tsx";
 
 export const ProductPage = () => {
+  const [annoucementInfo, setAnnoucementInfo] = useState<any>([]);
+
+  useEffect(() => {
+    // const getAnnoucement = () => {
+    //   ListTest.map((car: any) => {
+
+    //     return ;
+    //   });
+    // };
+
+    setAnnoucementInfo(ListTest[0]);
+  }, []);
+
   return (
-    <>
+    <ProductPageStyle>
       <Header />
-      <div>
-        <img
-          src="https://garagem360.com.br/wp-content/uploads/2023/06/Strada-fundo-branco.jpg"
-          alt=""
-        />
-        <div>
-          <h2>Car name</h2>
-          <div>
+      <div className="subheader-blue"></div>
+      <div className="container-main">
+        <div className="container-product">
+          <img src={annoucementInfo.imgCar} alt="" />
+          <div className="container-infos">
+            <h2>{annoucementInfo.name}</h2>
             <div>
-              <span>year</span>
-              <span>km</span>
-            </div>
-            <div>
-              <h5>price,0000</h5>
-            </div>
-          </div>
-          <button>comprar</button>
-        </div>
-        <div>
-          <h5>Descrição</h5>
-          <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged
-          </p>
-        </div>
-        <div>
-          <h5>Comentarios</h5>
-          <ul>
-            <li>
               <div>
-                <span>IN</span>
-                <h5>Nome </h5>
+                <span>{annoucementInfo.year}</span>
+                <span>{annoucementInfo.km}</span>
               </div>
-              <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book. It has
-                survived not only five centuries, but also the leap into
-                electronic typesetting, remaining essentially unchanged
-              </p>
-            </li>
-            
-          </ul>
+              <div>
+                <h5>{annoucementInfo.price}</h5>
+              </div>
+            </div>
+            <button>comprar</button>
+          </div>
+          <div className="container-description">
+            <h5>Descrição</h5>
+            <p>{annoucementInfo.descripition}</p>
+          </div>
+        </div>
+        <div className="container-aside">
+          <AnnouncementPhotosList />
+          <AnnouncerInfo />
+        </div>
+        <div className="container-comments">
+          <CommentsComponent />
+          <CreateCommentForm />
         </div>
       </div>
-    </>
+      <Footer />
+    </ProductPageStyle>
   );
 };
