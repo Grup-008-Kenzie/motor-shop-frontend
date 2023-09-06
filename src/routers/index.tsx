@@ -5,6 +5,7 @@ import { LoginPage } from "../pages/login";
 import { Register } from "../pages/Register";
 import { RegisterLoginProvider } from "../contexts/contexRegisterLogin";
 import { ProfilePage } from "../pages/Profile";
+import { ProductPage } from "../pages/Product";
 import { NotFound } from "../pages/notFound";
 import { PasswordRecovery } from "../pages/passwordRecovery";
 
@@ -20,6 +21,8 @@ export const RoutesMain = () => {
             <Route path="/Register" element={<Register />} />
             <Route path="/resetPassword/:tokenUser" element={<PasswordRecovery />} />
           </Route>
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/productPage" element={<ProductPage />} />
         </Route>
       </Route>
       <Route path="*" element={<NotFound/>}/>
