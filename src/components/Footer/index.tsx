@@ -1,5 +1,5 @@
 import { FooterStyled } from "../../styles/Footer";
-import Logo from "../../assets/logo2.png";
+import Logo from "../../assets/logo2.svg";
 import { ButtonStandard } from "../../styles/buttons";
 import angleUp from "../../assets/angleUp.svg";
 

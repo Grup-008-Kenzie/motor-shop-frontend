@@ -1,11 +1,26 @@
 import { styled } from "styled-components";
-
 export const ProfilePageStyle = styled.div`
-  background-color: var(--Grey-7);
+background-color: var(--Grey-7);
+  .notUser{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    gap: 25px;
+    height: 100vh;
+    max-height: 100%;
+    width: 100%;
+    background-color: var(--WhiteFixed);
+    h2{
+      font-size: 1.5rem;
+      color: #0BB5C8;
+    }
+  }
   .subheader-blue {
     width: 100%;
     height: 300px;
     background-color: var(--brand1);
+    
   }
 
   .container-profile {
@@ -21,11 +36,56 @@ export const ProfilePageStyle = styled.div`
     padding: 50px;
     gap: 1.6rem;
     border-radius: 4px;
-
+    .avatarUser:hover span {
+      display: flex;
+    }
+    .avatarUser {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100px;
+      height: 100px;
+      background-color: var(--brand1);
+      border-radius: 50%;
+      font-family: "Inter", sans-serif;
+      font-weight: 500;
+      color: var(--WhiteFixed);
+      font-size: 2.2rem;
+      position: relative;
+      span {
+        display: none;
+        padding-top: 50px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        font-size: 0.8rem;
+        position: fixed;
+        background-color: rgba(11, 13, 13, 0.3);
+        width: 100px;
+        height: 100px;
+        transition: 1s;
+        cursor: pointer;
+      }
+    }
     img {
       width: 100px;
       height: 100px;
       border-radius: 50%;
+    }
+    button {
+      padding: 12px 22px;
+      background-color: transparent;
+      border: 2px solid var(--brand1);
+      color: var(--brand1);
+      border-radius: 4px;
+      transition: all ease-in 0.2s;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: var(--brand1);
+      color: #ffffff;
     }
   }
 
@@ -53,25 +113,16 @@ export const ProfilePageStyle = styled.div`
     color: var(--Grey-2);
   }
 
-  button {
-    padding: 12px 22px;
-    background-color: transparent;
-    border: 2px solid var(--brand1);
-    color: var(--brand1);
-    border-radius: 4px;
-    transition: all ease-in 0.2s;
-    font-size: 16px;
-    cursor: pointer;
-  }
-
-  button:hover {
-    background-color: var(--brand1);
-    color: #ffffff;
-  }
-
   @media (max-width: 800px) {
     .container-profile {
       width: 90%;
+    }
+
+    .info-profile h3 {
+      font-size: 20px;
+    }
+    .info-profile p {
+      font-size: 16px;
     }
   }
 `;

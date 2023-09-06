@@ -11,6 +11,9 @@ const GlobalStyle = createGlobalStyle`
     box-sizing:border-box;
     font-family: 'Inter', sans-serif;
 }
+.modal-open{
+  overflow: hidden;
+}
   :root{
     --brand1: #006bba;
     --brand2: #10619c;
@@ -91,7 +94,7 @@ const GlobalStyle = createGlobalStyle`
 }
 
 *::-webkit-scrollbar-thumb:hover {
-  background-color: var(--alert1);
+  background-color: var(--brand1);
 }
 
 *::-webkit-scrollbar-thumb:active {

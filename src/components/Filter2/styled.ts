@@ -8,6 +8,7 @@ export const FiltroStyled = styled.div`
   gap: 32px;
   padding-top: 50px;
   padding-left: 30px;
+  margin-bottom: 100px;
   div {
     width: 100%;
     .closeFilter {
